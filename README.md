@@ -19,9 +19,7 @@
 <details>
 <summary>Click to see Output of program.</summary>
 
-<details>
-<summary>Click to expand logs</summary>
-
+```text
 --- Dataset Verification ---
 Xor Input: 1 0 | Xor Target: 1
 Xor Input: 0 1 | Xor Target: 1
@@ -40,9 +38,10 @@ Row 0 | Gradient Error Delta: -0.139559
 Row 1 | Gradient Error Delta: -0.138388
 Row 2 | Gradient Error Delta: 0.099714
 Row 3 | Gradient Error Delta: 0.115102
+```
 
 </details>
 
-# Updated README.md
+1. Updated README.md
 
 * Log made in 28th June(Sunday), 2026, 12:39 p.m.

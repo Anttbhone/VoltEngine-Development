@@ -7,6 +7,6 @@
 - [x] Calculate the Gradient Error Deltas.
 
 ## Phase 2: Backpropagation (Next Steps)
-- [ ] Add an activation function (like Sigmoid) to handle the logic.
+- [x] Add an activation function (like Sigmoid) to handle the logic.
 - [ ] Write code to update the weights using the error deltas.
 - [ ] Make a training loop that runs thousands of times until the Total Loss gets close to 0.

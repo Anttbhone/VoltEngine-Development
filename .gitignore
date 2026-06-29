@@ -2,6 +2,9 @@
 /build/
 /out/
 
+*.bin
+*./
+*.weights
 *.exe
 *.out
 *.app

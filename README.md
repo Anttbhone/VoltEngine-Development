@@ -2,18 +2,19 @@
 
 A simple, framework-free AI engine built from scratch in C++.
 
+## Current Available Models
+* VoltEngine 1.0
+
 ## Project Status
-I paused the 1B parameter model due to hardware limits and the tough learning curve. I am starting with a small 100-parameter AI to solve the XOR problem. This will help me learn how forward passing, weights, biases, and backpropagation work under the hood.
+Currently working on the 1B Parameters LLM's BPE tokenizer.
 
 ## Current Setup
-* **Inputs**: 2 numbers (like 1 and 0)
-* **Hidden Brain Nodes**: 4 nodes
-* **Output**: 1 final guess (should be 0 or 1)
+* Reads line-by-line from dataset.txt and prints them out until the end of word "<EOW>" tag.
 
-## How to Run It
+## How to Run the tokenizer
 ```bash
-g++ main.cpp -o volt_engine
-./volt_engine
+clang++ tokenizer.cpp -o token
+./token
 ```
 
 **Mentorship**: Developed with the help of Gemini as a virtual mentor for learning the the math under the hood of the enigne and C++ syntax.

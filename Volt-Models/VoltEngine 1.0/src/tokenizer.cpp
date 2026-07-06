@@ -42,16 +42,18 @@ int main() {
 
         const std::vector<size_t>& positions = pair_position[best_pair];
         for (size_t pos : positions) {
-            if (tokens[pos] == best_pair.first && tokens[pos + 1] == best_pair.second) {
-                tokens[pos] = next_token_id;
-                tokens[pos + 1] = -1; 
+            if (pos + 1 < tokens.size()) {
+                if (tokens[pos] == best_pair.first && tokens[pos + 1] == best_pair.second) {
+                    tokens[pos] = next_token_id;
+                    tokens[pos + 1] = -1; 
+                }
             }
         }
         next_token_id++;
         size_t write_idx = 0;
-        for (int read_idx = 0; tokens.size(); ++read_idx) {
+        for (int read_idx = 0; read_idx < tokens.size(); ++read_idx) {
             if (tokens[read_idx] != -1) {
-                tokens[write_idx] = tokens[write_idx];
+                tokens[write_idx] = tokens[read_idx];
                 write_idx++;
                 }
             }

@@ -31,11 +31,32 @@ int main() {
         for (auto const& item : pair_position) {
             if (item.second.size() > max_count) {
                 best_pair = item.first;
-                max_count.item.second.size();
+                max_count = item.second.size();
             }
         }
         if (max_count <= 1) break;
-    }
+        std::string new_token_str = inverse_vocabs[best_pair.first] + inverse_vocabs[best_pair.second];
+        vocabs[new_token_str] = next_token_id;
+        inverse_vocabs[next_token_id] = new_token_str;
+        std::cout << "Merged ID (" << best_pair.first << ", " << best_pair.second << ") ID -> " << next_token_id << "\n";
+
+        const std::vector<size_t>& positions = pair_position[best_pair];
+        for (size_t pos : positions) {
+            if (tokens[pos] == best_pair.first && tokens[pos + 1] == best_pair.second) {
+                tokens[pos] = next_token_id;
+                tokens[pos + 1] = -1; 
+            }
+        }
+        next_token_id++;
+        size_t write_idx = 0;
+        for (int read_idx = 0; tokens.size(); ++read_idx) {
+            if (tokens[read_idx] != -1) {
+                tokens[write_idx] = tokens[write_idx];
+                write_idx++;
+                }
+            }
+            tokens.resize(write_idx);
+        } 
     dataset.close();
     return 0;
 }

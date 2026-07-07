@@ -58,7 +58,15 @@ int main() {
                 }
             }
             tokens.resize(write_idx);
-        } 
+        }
+    std::ofstream out_file("vocab.model");
+    for (auto const& item : vocabs) {
+        out_file << item.second << " " << item.first << "\n";
+        std::string token_text = item.first;
+        if (token_text == "\n") token_text = "\\n";
+        it (token_text == "\r") token_text = "\\r";
+    }
+    out_file.close();
     dataset.close();
     return 0;
 }

@@ -1,4 +1,4 @@
-# VoltEngine 1.0 Development
+# VoltEngine 1B Development
 
 * [ ] Tokenizer
 * [ ] Tensor

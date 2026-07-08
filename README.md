@@ -3,7 +3,7 @@
 A simple, framework-free AI engine built from scratch in C++.
 
 ## Current Available Models
-* VoltEngine 1.0
+* VoltEngine 1B
 
 ## Project Status
 Currently working on the 1B Parameters LLM's BPE tokenizer.

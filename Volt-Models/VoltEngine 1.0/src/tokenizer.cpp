@@ -4,6 +4,14 @@
 #include <map>
 #include <fstream>
 
+std::string decode(const std::vector<int>& input_ids, std::map<int, std::string>& inverse_map>) {
+    std::string result_text;
+    for (int id : input_ids) {
+        result_text += inverse_map[id];
+    }
+    return result_text;
+}
+
 int main() {
     std::ifstream dataset("dataset.txt", std::ios::binary);
     std::vector<int> tokens;
@@ -61,10 +69,10 @@ int main() {
         }
     std::ofstream out_file("vocab.model");
     for (auto const& item : vocabs) {
-        out_file << item.second << " " << item.first << "\n";
         std::string token_text = item.first;
         if (token_text == "\n") token_text = "\\n";
-        it (token_text == "\r") token_text = "\\r";
+        if (token_text == "\r") token_text = "\\r";
+        out_file << item.second << " " << item.first << "\n";
     }
     out_file.close();
     dataset.close();

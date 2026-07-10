@@ -12,6 +12,26 @@ std::string decode(const std::vector<int>& input_ids, std::map<int, std::string>
     return result_text;
 }
 
+std::vector<int> encoder(std::string& text, std::map<std::string, int>& vocab_map) {
+    std::vector<int> compressed_tokens;
+    for (size_t i = 0; i < text.length(); i++) {
+        int longest_match_id = -1;
+        size_t longest_match_len = 0;
+        for (auto const& item : vocab_map) {
+            if (text.substr(i, item.first.length()) == item.first) {
+                if (longest_match_len > 0) {
+                    text.push_back(longest_match_id);
+                    i += longest_match_len;
+                } else {
+                    compressed_tokens.push_back(static_cast<unsigned char> (text[i]));
+                    i++;
+                }
+            }
+        }
+    }
+    return compressed_tokens;
+}
+
 int main() {
     std::ifstream dataset("dataset.txt", std::ios::binary);
     std::vector<int> tokens;

@@ -4,7 +4,7 @@
 #include <map>
 #include <fstream>
 
-std::string decode(const std::vector<int>& input_ids, std::map<int, std::string>& inverse_map>) {
+std::string decode(const std::vector<int>& input_ids, std::map<int, std::string>& inverse_map) {
     std::string result_text;
     for (int id : input_ids) {
         result_text += inverse_map[id];
@@ -21,7 +21,10 @@ int main() {
     }
     std::map<std::string, int> vocabs;
     std::map<int, std::string> inverse_vocabs;
-    int next_token_id = 256;
+    int next_token_id = 259;
+    vocabs["<PAD>"] = 256; inverse_vocabs[256] = "<PAD>";
+    vocabs["<BOS>"] = 257; inverse_vocabs[257] = "<BOS>";
+    vocabs["<EOS>"] = 258; inverse_vocabs[258] = "<EOS>";
     for (int i = 0; i < 256; i++) {
         std::string byte_str(1, static_cast<char>(i));
         vocabs[byte_str] = i;
@@ -72,8 +75,10 @@ int main() {
         std::string token_text = item.first;
         if (token_text == "\n") token_text = "\\n";
         if (token_text == "\r") token_text = "\\r";
-        out_file << item.second << " " << item.first << "\n";
+        out_file << item.second << " " << token_text << "\n";
     }
+    std::string final_output = decode(tokens, inverse_vocabs);
+    std::cout << "Docoded Text: " << final_output << "\n";
     out_file.close();
     dataset.close();
     return 0;

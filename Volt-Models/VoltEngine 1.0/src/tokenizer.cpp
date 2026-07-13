@@ -12,26 +12,35 @@ std::string decode(const std::vector<int>& input_ids, std::map<int, std::string>
     return result_text;
 }
 
-std::vector<int> encoder(std::string& text, std::map<std::string, int>& vocab_map) {
+std::vector<int> encoder(const std::string& text, std::map<std::string, int>& vocab_map) {
     std::vector<int> compressed_tokens;
-    for (size_t i = 0; i < text.length(); i++) {
+    size_t i = 0;
+    
+    while (i < text.length()) {
         int longest_match_id = -1;
         size_t longest_match_len = 0;
+        
         for (auto const& item : vocab_map) {
-            if (text.substr(i, item.first.length()) == item.first) {
-                if (longest_match_len > 0) {
-                    text.push_back(longest_match_id);
-                    i += longest_match_len;
-                } else {
-                    compressed_tokens.push_back(static_cast<unsigned char> (text[i]));
-                    i++;
+            std::string token_string = item.first;
+            if (i + token_string.length() <= text.length()) {
+                if (text.substr(i, token_string.length()) == token_string) {
+                    if (token_string.length() > longest_match_len) {
+                        longest_match_len = token_string.length();
+                        longest_match_id = item.second;
+                    }
                 }
             }
+        }
+        if (longest_match_len > 0) {
+            compressed_tokens.push_back(longest_match_id); 
+            i += longest_match_len;
+        } else {
+            compressed_tokens.push_back(static_cast<unsigned char>(text[i]));
+            i++;
         }
     }
     return compressed_tokens;
 }
-
 int main() {
     std::ifstream dataset("dataset.txt", std::ios::binary);
     std::vector<int> tokens;

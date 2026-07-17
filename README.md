@@ -6,14 +6,14 @@ A simple, framework-free AI engine built from scratch in C++.
 * None
 
 ## Project Status
-Currently working on the 1B Parameters LLM's BPE tokenizer.
+Currently working on the 1B Parameters LLM's tensor.
 
-## Current Setup
-* Reads line-by-line from dataset.txt and finds the most frequent pairs, merges them and writes out to "vocab.model" with their own index.
+## Current Setup (Tensor)
+* Has a few functions to make a matrix, find the index of the matrix, add float values into it and print the matrix in a formatted form. 
 
-## How to Run the tokenizer
+## How to Run the tensor
 ```bash
-clang++ tokenizer.cpp -o token && ./token
+clang++ tensor.cpp -o tensor && ./tensor
 ```
 
 **Mentorship**: Developed with the help of Gemini as a virtual mentor for learning the the math under the hood of the enigne and C++ syntax.

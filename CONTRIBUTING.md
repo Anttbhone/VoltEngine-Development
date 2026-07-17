@@ -1,6 +1,6 @@
 # VoltEngine 1B Development
 
-* [ ] Tokenizer
-* [ ] Tensor
+* [+] BPE Tokenizer
+* [-] Tensor
 * [ ] Transformer
 * [ ] Backpropagation

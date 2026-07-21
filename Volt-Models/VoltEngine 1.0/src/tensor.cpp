@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 class Tensor {
 public:
 
@@ -42,12 +43,19 @@ public:
         }
         return result;
     }
-
-
+    void silu() {
+        for (int i = 0; i < data.size(); i++) {
+            float x = data[i];
+            data[i] = x * 1.0f / (1.0f + std::exp(-x));
+        }
+    }
 };
 int main() {
-    Tensor matrix(2, 3);
-    matrix.at(1, 1) = 7.5;
-    matrix.print();
+    Tensor test(1, 3);
+    test.at(0, 0) = -2.0f;
+    test.at(0, 1) = 0.0f;
+    test.at(0, 2) = 2.0f;
+    test.silu();
+    test.print();
     return 0;
 }

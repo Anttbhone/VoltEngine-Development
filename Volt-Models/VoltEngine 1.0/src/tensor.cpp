@@ -49,6 +49,17 @@ public:
             data[i] = x * 1.0f / (1.0f + std::exp(-x));
         }
     }
+
+    void softmax() {
+        for (int i = 0; i < data.size(); i++) {
+            float max_val = data[0];
+            float sum_exp = 0.0f;
+            for (int i = 0; i < data.size(); i++) {
+                data[i] = data[i] - std::exp(max_val) + sum_exp;
+                data[i] /= sum_exp;
+            }
+        }
+    }
 };
 int main() {
     Tensor test(1, 3);

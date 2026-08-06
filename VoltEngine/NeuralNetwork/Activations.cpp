@@ -1,4 +1,4 @@
-#include "Activitations.h"
+#include "Activations.h"
 #include <cmath>
 
 void Activations::silu(Tensor& tensor) {
@@ -9,5 +9,18 @@ void Activations::silu(Tensor& tensor) {
 }
 
 void Activations::softmax(Tensor& tensor) {
-    // Still not done yet!!!!!
+    float max_val = data[i];
+    for (int i = 0; i < tensor.data.size(); i++) {
+        if (tensor[i] > max_val) {
+            max_val = tensor[i];
+        }
+    }
+    float sum_exp = 0.0f;
+    for (size_t i = 0; i < tensor.data.size(); i++) {
+        tensor.data[i] = std::exp(tensor.data[i] - max_val);
+        sum_exp += tensor.data[i];
+    }
+    for (int i = 0; i < tensor.data.size(); i++) {
+        tensor.data[i] /= sum_exp;
+    }
 }

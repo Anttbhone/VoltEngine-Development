@@ -44,3 +44,23 @@ Tensor Tensor::matmul(Tensor& other) {
     }
     return result;
 }
+void backward_matmul(Tensor& input, Tensor& weights, Tensor& output) {
+    for (int i = 0; i < input.rows; i++) {
+        for (int j = 0; j < input.cols; j++) {
+            float grad_val = 0.0f;
+            for (int k = 0; k < weights.cols; k++) {
+                grad_val += output.at_grad(i, k) * weights.at(k, j);
+            }
+            input.at_grad(i, j) += grad_val;
+        }
+    }
+    for (int i = 0; i < weights.rows; i++) {
+        for (int j = 0; j < weights.cols; j++) {
+            float grad_val = 0.0f;
+            for (int k = 0; k < input.rows; k++) {
+                grad_val += input.at(k, i) * output.at_grad(k, j);
+            }
+            weights.at_grad(i, j) += grad_val;
+        }
+    }
+}

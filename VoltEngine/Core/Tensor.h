@@ -13,4 +13,6 @@ public:
     float& at_grad(int r, int c);
     void print();
     Tensor matmul(Tensor& other);
+    void backward_matmul(Tensor& input, Tensor& weights, Tensor& output);
+
 };

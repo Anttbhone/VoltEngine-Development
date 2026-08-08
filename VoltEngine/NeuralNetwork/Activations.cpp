@@ -9,10 +9,10 @@ void Activations::silu(Tensor& tensor) {
 }
 
 void Activations::softmax(Tensor& tensor) {
-    float max_val = data[i];
+    float max_val = tensor.data[0];
     for (int i = 0; i < tensor.data.size(); i++) {
-        if (tensor[i] > max_val) {
-            max_val = tensor[i];
+        if (tensor.data[i] > max_val) {
+            max_val = tensor.data[i];
         }
     }
     float sum_exp = 0.0f;

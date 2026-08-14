@@ -5,14 +5,14 @@
 #include <string>
 
 BPETokenizer::BPETokenizer() : next_token_id(259) {
-    vocabs["<PAD>"] = 256; inverse_vocabs[256] = "<PAD>";
-    vocabs["<BOS>"] = 257; inverse_vocabs[257] = "<BOS>";
-    vocabs["<EOS>"] = 258; inverse_vocabs[258] = "<EOS>";
+    vocab["<PAD>"] = 256; inverse_vocab[256] = "<PAD>";
+    vocab["<BOS>"] = 257; inverse_vocab[257] = "<BOS>";
+    vocab["<EOS>"] = 258; inverse_vocab[258] = "<EOS>";
     
     for (int i = 0; i < 256; i++) {
         std::string byte_str(1, static_cast<char>(i));
-        vocabs[byte_str] = i;
-        inverse_vocabs[i] = byte_str;
+        vocab[byte_str] = i;
+        inverse_vocab[i] = byte_str;
     }
 }
 
@@ -23,7 +23,7 @@ std::vector<int> BPETokenizer::encode(const std::string& text) {
         int longest_match_id = -1;
         size_t longest_match_len = 0;
         
-        for (auto const& item : vocabs) { // Look directly inside class vocabs map
+        for (auto const& item : vocab) { 
             std::string token_string = item.first;
             if (i + token_string.length() <= text.length()) {
                 if (text.substr(i, token_string.length()) == token_string) {
@@ -47,7 +47,11 @@ std::vector<int> BPETokenizer::encode(const std::string& text) {
 std::string BPETokenizer::decode(const std::vector<int>& input_ids) {
     std::string result_text = "";
     for (int id : input_ids) {
-        result_text += inverse_vocabs[id];
+        result_text += inverse_vocab[id];
     }
     return result_text;
+}
+void BPETokenizer::token_train(int target_vocab_size) {
+    while (vocab.size() < target_vocab_size) {
+    }
 }

@@ -5,11 +5,13 @@
 
 class BPETokenizer {
 public:
-    std::map<std::string, int> vocabs;
-    std::map<int, std::string> inverse_vocabs;
+    std::map<int, std::string> inverse_vocab;
+    std::map<std::string, int> vocab;
     int next_token_id;
-
+    int target_vocab;
     BPETokenizer();
     std::vector<int> encode(const std::string& text);
     std::string decode(const std::vector<int>& input_ids);
+    void token_train;
+    int target_vocab_size
 };

@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <fstream>
 
 BPETokenizer::BPETokenizer() : next_token_id(259) {
     vocab["<PAD>"] = 256; inverse_vocab[256] = "<PAD>";
@@ -51,7 +52,11 @@ std::string BPETokenizer::decode(const std::vector<int>& input_ids) {
     }
     return result_text;
 }
-void BPETokenizer::token_train(int target_vocab_size) {
+void BPETokenizer::token_train(int target_vocab_size, const std::string& dataset_path) {
+    std::ifstream dataset(dataset_path, std::ios::binary);
+    std::vector<int> tokens;
+    char byte;
     while (vocab.size() < target_vocab_size) {
+    tokens.push_back(static_cast<unsigned char>(byte));
     }
 }

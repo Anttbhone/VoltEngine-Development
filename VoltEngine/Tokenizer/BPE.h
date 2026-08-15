@@ -12,6 +12,6 @@ public:
     BPETokenizer();
     std::vector<int> encode(const std::string& text);
     std::string decode(const std::vector<int>& input_ids);
-    void token_train;
-    int target_vocab_size
+    void token_train(int target_vocab_size, const std::string& dataset_path);
+    int target_vocab_size;
 };

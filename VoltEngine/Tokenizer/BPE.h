@@ -14,4 +14,6 @@ public:
     std::string decode(const std::vector<int>& input_ids);
     void token_train(int target_vocab_size, const std::string& dataset_path);
     int target_vocab_size;
+    void save_vocab(const std::string& filepath);
+    void load_vocab(const std::string& filepath);
 };

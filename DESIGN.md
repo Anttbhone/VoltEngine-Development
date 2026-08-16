@@ -144,11 +144,6 @@ BPETokenizer tokenizer;
 
 tokenizer.token_train(300, "dataset.txt");
 ```
-
-### Notes
-
-The current implementation performs a straightforward pair scan over the token sequence. This is intentionally simple and is suitable for the initial implementation, but it may be optimized later for larger datasets.
-
 ---
 
 ## 3.3 `encode()`
@@ -556,59 +551,19 @@ rather than requiring every operation to be manually rewritten.
 
 ---
 
-# 9. Future Video Generation System
+# 9. Design Principles
 
-One of the long-term goals of VoltEngine is to support a small video-generation model implemented and executed using the C++ framework.
-
-### Target
-
-Initial target:
-
-```text
-Model size: approximately 100M parameters
-Target hardware: consumer hardware
-Target GPU memory: approximately 8 GB VRAM
-```
-
-This is a development target rather than a current capability of VoltEngine.
-
-### Planned Pipeline
-
-A possible future architecture is:
-
-```text
-Text / Conditioning
-        ↓
-Tokenizer
-        ↓
-Embedding
-        ↓
-Neural Network
-        ↓
-Latent / Feature Representation
-        ↓
-Video Generation
-        ↓
-Frame Output
-```
-
-The exact architecture is intentionally undecided until the underlying framework is capable of training and running smaller neural networks reliably.
-
----
-
-# 10. Design Principles
-
-## 10.1 C++ First
+## 9.1 C++ First
 
 VoltEngine is written primarily in C++.
 
 The core framework should not require a Python interpreter to perform its fundamental operations.
 
-## 10.2 Lightweight
+## 9.2 Lightweight
 
 The framework should avoid unnecessary dependencies where practical.
 
-## 10.3 Reusable Components
+## 9.3 Reusable Components
 
 Common operations should be implemented once and reused.
 
@@ -620,7 +575,7 @@ Linear layer(128, 64);
 
 should replace repeatedly writing the same matrix multiplication and bias logic.
 
-## 10.4 Understandable Source
+## 9.4 Understandable Source
 
 The implementation should remain understandable to developers who want to inspect how the framework works.
 
@@ -639,13 +594,13 @@ Models
 Runtime
 ```
 
-## 10.6 Consumer Hardware
+## 9.6 Consumer Hardware
 
 VoltEngine is intended to explore efficient AI workloads on consumer hardware rather than assuming access to large server infrastructure.
 
 ---
 
-# 11. User Levels
+# 10. User Levels
 
 VoltEngine is intended to support different levels of users.
 
@@ -682,7 +637,7 @@ The source distribution should therefore remain available for users who want dee
 
 ---
 
-# 12. Versioning
+# 11. Versioning
 
 VoltEngine uses semantic versioning:
 
@@ -728,7 +683,7 @@ v1.0.0 → v1.0.1
 
 ---
 
-# 13. API Stability
+# 12. API Stability
 
 Functions should be considered experimental until the framework reaches a stable release.
 
@@ -746,44 +701,9 @@ Stable APIs should only be promised after they have been tested and reviewed.
 
 ---
 
-# 14. Current Development Status
-
-### Implemented
-
-- [x] `BPETokenizer`
-- [x] Base byte vocabulary
-- [x] Special tokens
-- [x] BPE training prototype
-- [x] `encode()`
-- [x] `decode()`
-- [x] `save_vocab()`
-- [x] Sigmoid
-- [x] Softmax
-
-### In Development
-
-- [ ] Vocabulary loading
-- [ ] Tensor system
-- [ ] Matrix operations
-- [ ] `Linear`
-- [ ] Neural-network model structure
-- [ ] Loss functions
-- [ ] Backpropagation
-- [ ] Optimizers
-- [ ] Model serialization
-
-### Long-Term
-
-- [ ] Small-model training
-- [ ] GPU acceleration
-- [ ] CUDA backend
-- [ ] Model inference runtime
-- [ ] Approximately 100M-parameter model experiments
-- [ ] Video-generation model experiments
-
 ---
 
-# 15. Example End-to-End Tokenizer Workflow
+# 13. Example End-to-End Tokenizer Workflow
 
 ```cpp
 #include "BPE.h"
@@ -822,71 +742,7 @@ Decode output
 
 ---
 
-# 16. Documentation Maintenance
-
-When adding a public function to VoltEngine:
-
-1. Add the function to the appropriate header.
-2. Implement the function.
-3. Test the function.
-4. Add its documentation to this file.
-5. Record its version.
-6. Add an example.
-7. Update the development-status section if necessary.
-
-Documentation should describe the actual behavior of the implementation, not only the intended behavior.
-
-If a function is not implemented, mark it as:
-
-```text
-Status: Planned / Not implemented
-```
-
-This prevents the documentation from claiming that VoltEngine supports functionality that does not yet exist.
-
----
-
-# 17. Development Philosophy
-
-VoltEngine is being developed incrementally.
-
-The goal is not to reproduce a large existing machine-learning framework feature-for-feature.
-
-The goal is to understand and implement the fundamental components required to build small AI systems in C++.
-
-The development order should therefore prioritize:
-
-```text
-Foundation
-   ↓
-Tensor operations
-   ↓
-Neural-network layers
-   ↓
-Forward pass
-   ↓
-Loss
-   ↓
-Backpropagation
-   ↓
-Optimizer
-   ↓
-Training
-   ↓
-Model serialization
-   ↓
-Performance optimization
-   ↓
-GPU acceleration
-   ↓
-Larger models
-```
-
-This order keeps the framework understandable and gives each layer of the system a stable foundation before more complex functionality is added.
-
----
-
-# 18. Current API Summary
+# 1 Current API Summary
 
 | Component | Function | Status |
 |---|---|---|

@@ -115,11 +115,12 @@ void BPETokenizer::save_vocab(const std::string& filepath) {
     out_file.close();
 }
 /*------------------------------------------------------------------------------------------------------*/
-void BPETokenizer::load_vocab(const std::string& filpath) {
+void BPETokenizer::load_vocab(const std::string& filepath) {
     std::ifstream in_path(filepath);
     int id;
     std::string token_text;
-    while (in_file >> id >> token_text) {
-        
+    while (in_path >> id >> token_text) {
+        vocab[token_text] = id;
+        inverse_vocab[id] = token_text;
     }
 }

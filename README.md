@@ -78,5 +78,6 @@ int main() {
 }
 ```
 
+**Version Releases**: Versions will change but only the stable rock-solid version gets published which undergos many testing.
 
 **Mentorship**: Developed with the help of Gemini as a virtual mentor for learning the the math under the hood of the enigne and C++ syntax. Trained and evaluated on paper first to master backpropagation math before migrating logic to C++ algorithms.
